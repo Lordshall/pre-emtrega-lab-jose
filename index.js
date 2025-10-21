@@ -18,16 +18,31 @@ let [, , method, item] = process.argv;
 // }
 
 // Get single item
-if (method === 'GET' && item.startsWith("items/")) {
-    // const [, id] = item.split("/");
-    let id = item.split("/")[1];
-    id = parseInt(id);
+// if (method === 'GET' && item.startsWith("items/")) {
+//     // const [, id] = item.split("/");
+//     let id = item.split("/")[1];
+//     id = parseInt(id);
 
-    if (isNaN(id) || id <= 0) {
-        console.log("Is not a number or it is less than 1");
-    }
+//     if (isNaN(id) || id <= 0) {
+//         console.log("Is not a number or it is less than 1");
+//     }
 
-    fetch("https://fakestoreapi.com/products/" + id)
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+//     fetch("https://fakestoreapi.com/products/" + id)
+//         .then((response) => response.json())
+//         .then((data) => console.log(data));
+// }
+
+// products <title> <price> <category>
+
+if (method == 'POST' && item == "items") {
+    const product = { title: process.argv[4], price: process.argv[5], category: process.argv[6] };
+
+    fetch('https://fakestoreapi.com/products', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(product)
+    })
+        .then(response => response.json())
+        .then(data => console.log(data));
+
 }
