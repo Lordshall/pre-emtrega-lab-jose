@@ -18,6 +18,7 @@ let [, , method, item] = process.argv;
 // }
 
 // Get single item
+
 // if (method === 'GET' && item.startsWith("items/")) {
 //     // const [, id] = item.split("/");
 //     let id = item.split("/")[1];
@@ -41,6 +42,19 @@ if (method == 'POST' && item == "items") {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(product)
+    })
+        .then(response => response.json())
+        .then(data => console.log(data));
+
+}
+
+// Delete single item
+
+if (method == 'DELETE' && item.startsWith("items/")) {
+    const id = item.split("/")[1];
+
+    fetch('https://fakestoreapi.com/products/1', {
+        method: 'DELETE',
     })
         .then(response => response.json())
         .then(data => console.log(data));
